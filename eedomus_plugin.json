@@ -1,0 +1,69 @@
+{
+	"plugin_id": "netatmo_public",
+	"name_fr": "Données Publiques Netatmo",
+	"icon": "netatmo_public.png",
+	"version": "1.0",
+	"creation_date": "2022-05-11",
+	"modification_date": "2022-05-11",
+	"author": "<a href=\"https://kodono.info\" target=\"_blank\">AymKdn</a>",
+	"description_fr": "Permet de retrouver les données publiques (comme la température) des stations Netatmo dans une zone donnée.",
+	"description_en": "",
+	"description_es": "",
+	"description_it": "",
+	"description_de": "",
+	"forum_link": "https://forum.eedomus.com/viewtopic.php?f=50&t=11358",
+	"parameters": [
+		{
+			"parameter": "USERNAME",
+			"description": "L'email pour se connecter au compte Netatmo Dev",
+			"xtype": "textfield",
+      "field": "allowBlank:false, style:'width:480px'"
+	  },
+    {
+      "parameter": "PASSWORD",
+      "description": "Mot de passe pour se connecter au compte Netatmo Dev",
+      "xtype": "textfield",
+      "field": "allowBlank:false, style:'width:480px'"
+    },
+    {      
+      "parameter": "CLIENTID",
+      "description": "L'app id donné sur le site Netatmo Dev",
+      "xtype": "textfield",
+      "field": "allowBlank:false, style:'width:480px'"
+    },
+    {      
+      "parameter": "CLIENTSECRET",
+      "description": "L'app secret donné sur le site Netatmo Dev",
+      "xtype": "textfield",
+      "field": "allowBlank:false, style:'width:480px'"
+    }
+	],
+	"scripts": [
+		{
+			"name": "netatmo_public.php"
+		}
+	],
+	"devices": [
+    {
+      "device_id": "netatmo_public_state",
+      "parent_id": "action",
+      "module_id": "51",
+      "type": "http",
+      "name_fr": "plugin.name - Températures",
+      "icon": "netatmo_public.png",
+      "utilisation_id":"7",
+      "value_unit": "°C",
+      "parameters":
+      {
+        "VAR1": "",
+        "VAR2": "",
+        "VAR3": "",
+        "value_type": "float",
+        "ignore_errors": 3,
+        "RAW_URL": "http://localhost/script/?exec=netatmo_public.php&username=plugin.parameters.USERNAME&password=plugin.parameters.PASSWORD&clientid=plugin.parameters.CLIENTID&clientsecret=plugin.parameters.CLIENTSECRET&type=temperature&coord=[VAR1]",
+        "RAW_XPATH": "//netatmo_public/data/summary/temperature",
+        "POLLING": "5"
+      }
+    }
+	]
+}
